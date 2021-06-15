@@ -10,7 +10,7 @@ const moment = require("moment")
 const router = require('./routes')
 
 const app = express() // The instance that "host" our server
-const port = process.env.PORT || 3000 // The port number our server runs on
+const port = process.env.PORT || 4000 // The port number our server runs on
 
 // Allow views to have access to moment library
 app.locals.moment = moment
