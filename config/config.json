@@ -1,6 +1,6 @@
 {
   "development": {
-    "database": "your_project_name_here_development",
+    "database": "bruce-project2",
     "host": "localhost",
     "dialect": "postgres"
   },
