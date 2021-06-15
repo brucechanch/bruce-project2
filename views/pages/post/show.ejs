@@ -1,0 +1,36 @@
+<%- contentFor('meta') %>
+<title>Post Show</title>
+<%- contentFor('styles') %>
+<%- contentFor('scripts') %>
+<%- contentFor('body') %>
+<div id="Post-show" class="container my-3 text-center">
+  <h1 class="modal-title my-3">Post <span><%= Post.id %></span></h1>
+  <img
+    class="mr-3 mb-3"
+    src="<%= Post.User && Post.User.avatar ? Post.User.avatar : 'https://i1.wp.com/www.mnleadership.org/wp-content/uploads/2017/02/Anonymous-Avatar.png?ssl=1' %>"
+    alt="avatar"
+    style="width: 100px; height: auto;"
+  >
+  <h1 class="mb-3"><%= Post.title %></h1>
+  <h2 class="mb-3"><%= Post.description%></h2>
+  <h3 class="mb-3"><%= moment(Post.createdAt).format('YYYY/MM/DD') %></h3>
+
+  <% if (Post.PostItems.length > 0) { %>
+    <ul class="list-group">
+      <% Post.PostItems.forEach(function(item) { %>
+        <li class="list-group-item">
+          <span class="<%= (item.received ? 'text-decloration-through' : '') %>"><%= item.name %></span>
+          <% for (let i = 0; i < 5; i++) { %>
+            <% if (i < item.importance) { %>
+              <i class="fas fa-star"></i>
+            <% } else { %>
+              <i class="far fa-star"></i>
+            <% } %>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <div>No Items</div>
+  <% } %>
+</div>

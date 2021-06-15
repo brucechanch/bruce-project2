@@ -1,0 +1,46 @@
+<%- contentFor('meta') %>
+<title>My Post</title>
+<%- contentFor('styles') %>
+<%- contentFor('scripts') %>
+<script>
+  $(document).ready(function() {
+    $('#my-post-index').on('submit', '.delete-form', function(e) {
+      e.preventDefault()
+
+      axios({
+        url: $(e.target).data('url'),
+        method: $(e.target).data('method')
+      }).then(function() {
+        window.location.reload()
+      }).catch(function(err) {
+        alert(err.response.data.message)
+      })
+    })
+  })
+</script>
+<%- contentFor('body') %>
+<div id="my-post-index" class="container my-3 text-center">
+  <h1 class="mb-3">My post</h1>
+
+  <%- include('_partials/filter') %>
+
+  <a class="btn btn-success btn-sm mb-3" href="/my-post/new">New</a>
+
+  <% if (my-post.length > 0) { %>
+    <ul id="mypost-list" class="list-unstyled">
+      <% my-post.forEach(function(mypost){ %>
+        <li class="my-1">
+          <a class="show-btn font-weight-bold" href="/my/post/<%= post.id %>"><%= post.title %></a>
+          <a class="edit-btn btn btn-info btn-sm" href="/my/post/<%= post.id %>/edit"><i class="fas fa-edit"></i></a>
+          <form class="delete-form d-inline" data-url="/api/my/post/<%= post.id %>" data-method="DELETE">
+            <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+          </form>
+        </li>
+        <% }) %>
+    </ul>
+
+    <%- include('_partials/pagination') %>
+  <% } else { %>
+    <div>No Post in Here</div>
+  <% } %>
+</div>

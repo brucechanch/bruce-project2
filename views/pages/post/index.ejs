@@ -1,0 +1,24 @@
+<%- contentFor('meta') %>
+<title>Post Index</title>
+<%- contentFor('styles') %>
+<%- contentFor('scripts') %>
+<%- contentFor('body') %>
+<div id="post-index" class="container my-3 text-center">
+  <h1 class="mb-3">post</h1>
+
+  <%- include('_partials/filter') %>
+
+  <% if (post.length > 0) { %>
+    <ul class="list-unstyled">
+      <% post.forEach(function(post){ %>
+        <li class="my-1">
+          <a class="font-weight-bold" href="/post/<%= post.id %>"><%= post.title %></a>
+        </li>
+        <% }) %>
+    </ul>
+
+    <%- include('_partials/pagination') %>
+  <% } else { %>
+    <div>No posts</div>
+  <% } %>
+</div>
